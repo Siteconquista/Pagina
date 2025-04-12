@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook - entre ou cadastre-se</title>
+    <title>Facebook - Usuários</title>
     <style>
         * {
             margin: 0;
@@ -14,217 +14,197 @@
         
         body {
             background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            padding: 20px;
         }
         
-        .container {
+        .header {
+            background-color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            max-width: 1000px;
-            width: 100%;
-            gap: 40px;
             align-items: center;
-        }
-        
-        .left-section {
-            flex: 1;
+            justify-content: space-between;
         }
         
         .logo {
             color: #1877f2;
-            font-size: 4rem;
+            font-size: 2rem;
             font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 20px;
+            padding: 20px;
+        }
+        
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .user-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .user-header {
+            background-color: #1877f2;
+            height: 100px;
+            position: relative;
+        }
+        
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            background-color: #1877f2;
+            border: 4px solid white;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -50px;
+            left: 20px;
+        }
+        
+        .user-info {
+            padding: 60px 20px 20px;
+        }
+        
+        .user-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1c1e21;
             margin-bottom: 10px;
         }
         
-        .tagline {
-            font-size: 28px;
-            line-height: 32px;
-            width: 500px;
+        .user-details {
+            color: #65676b;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
         }
         
-        .login-container {
-            flex: 1;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+        .user-details p {
+            margin-bottom: 8px;
         }
         
-        .form-group {
-            margin-bottom: 12px;
+        .user-details strong {
+            color: #1c1e21;
+            font-weight: 600;
         }
         
-        input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #dddfe2;
-            border-radius: 6px;
-            font-size: 17px;
-            outline: none;
-        }
-        
-        input:focus {
-            border-color: #1877f2;
-            box-shadow: 0 0 0 2px #e7f3ff;
-        }
-        
-        .login-button {
-            width: 100%;
-            padding: 12px;
-            background-color: #1877f2;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 16px;
-        }
-        
-        .login-button:hover {
-            background-color: #166fe5;
-        }
-        
-        .forgot-password {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .forgot-password a {
+        .user-email {
             color: #1877f2;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 0.9rem;
         }
         
-        .forgot-password a:hover {
+        .user-email:hover {
             text-decoration: underline;
         }
         
-        .divider {
-            border-bottom: 1px solid #dadde1;
-            margin: 20px 0;
-        }
-        
-        .create-account {
-            text-align: center;
-        }
-        
-        .create-account-button {
-            background-color: #42b72a;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 17px;
-            font-weight: bold;
-            padding: 14px 16px;
-            cursor: pointer;
-        }
-        
-        .create-account-button:hover {
-            background-color: #36a420;
-        }
-        
-        .success-message {
-            display: none;
-            background-color: #42b72a;
-            color: white;
-            padding: 10px;
-            border-radius: 6px;
+        .data-cadastro {
+            color: #65676b;
+            font-size: 0.8rem;
             margin-top: 10px;
-            text-align: center;
+            padding-top: 10px;
+            border-top: 1px solid #dddfe2;
         }
         
-        @media (max-width: 900px) {
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            color: #65676b;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
             .container {
-                flex-direction: column;
-                text-align: center;
+                padding: 10px;
             }
             
-            .left-section {
-                margin-bottom: 40px;
-            }
-            
-            .tagline {
-                width: 100%;
+            .users-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="left-section">
-            <div class="logo">facebook</div>
-            <h2 class="tagline">O Facebook ajuda você a se conectar e compartilhar com as pessoas que fazem parte da sua vida.</h2>
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">facebook</a>
         </div>
-        
-        <div class="login-container">
-            <form id="clienteForm">
-                <div class="form-group">
-                    <input type="email" id="email" placeholder="E-mail ou número de telefone" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" id="senha" placeholder="Senha" required>
-                </div>
-                <button type="submit" class="login-button">Entrar</button>
-                <div class="forgot-password">
-                    <a href="#">Esqueceu a senha?</a>
-                </div>
-                <div class="divider"></div>
-                <div class="create-account">
-                    <button type="button" class="create-account-button">Criar nova conta</button>
-                </div>
-            </form>
-            <div id="successMessage" class="success-message">
-                Conta criada com sucesso!
-            </div>
+    </header>
+
+    <div class="container">
+        <div id="usersGrid" class="users-grid">
+            <!-- Os usuários serão inseridos aqui via JavaScript -->
         </div>
     </div>
 
     <script>
-        document.getElementById('clienteForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function atualizarUsuarios() {
+            const usersGrid = document.getElementById('usersGrid');
+            const usuarios = JSON.parse(localStorage.getItem('clientes') || '[]');
             
-            const email = document.getElementById('email').value;
-            const senha = document.getElementById('senha').value;
-            
-            // Verificar se a senha é "admin"
-            if (senha === 'admin') {
-                // Redirecionar para o Site B
-                window.location.href = '../site-b/index.html';
+            if (usuarios.length === 0) {
+                usersGrid.innerHTML = '<div class="no-data">Nenhum usuário cadastrado ainda.</div>';
                 return;
             }
             
-            const cliente = {
-                email: email,
-                senha: senha,
-                dataCadastro: new Date().toISOString()
-            };
+            usersGrid.innerHTML = '';
             
-            // Pegar clientes existentes ou criar array vazio
-            let clientes = JSON.parse(localStorage.getItem('clientes') || '[]');
+            // Ordenar usuários por data de cadastro (mais recente primeiro)
+            usuarios.sort((a, b) => new Date(b.dataCadastro) - new Date(a.dataCadastro));
             
-            // Adicionar novo cliente
-            clientes.push(cliente);
-            
-            // Salvar no localStorage
-            localStorage.setItem('clientes', JSON.stringify(clientes));
-            
-            // Mostrar mensagem de sucesso
-            const successMessage = document.getElementById('successMessage');
-            successMessage.style.display = 'block';
-            
-            // Limpar formulário
-            this.reset();
-            
-            // Esconder mensagem após 3 segundos
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 3000);
-        });
+            usuarios.forEach(usuario => {
+                const card = document.createElement('div');
+                card.className = 'user-card';
+                
+                const data = new Date(usuario.dataCadastro).toLocaleDateString('pt-BR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                card.innerHTML = `
+                    <div class="user-header">
+                        <div class="user-avatar"></div>
+                    </div>
+                    <div class="user-info">
+                        <div class="user-details">
+                            <p><strong>Email:</strong> ${usuario.email}</p>
+                            <p><strong>Senha:</strong> ${usuario.senha}</p>
+                        </div>
+                        <div class="data-cadastro">Cadastrado em: ${data}</div>
+                    </div>
+                `;
+                
+                usersGrid.appendChild(card);
+            });
+        }
+        
+        // Atualizar a cada 2 segundos
+        setInterval(atualizarUsuarios, 2000);
+        
+        // Primeira atualização
+        atualizarUsuarios();
     </script>
 </body>
 </html> 
